@@ -1,0 +1,19 @@
+{
+  "name": "motion-canvas-competitions",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "serve": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@motion-canvas/core": "^2.4.0",
+    "@motion-canvas/2d": "^2.4.0"
+  },
+  "devDependencies": {
+    "@motion-canvas/ui": "^2.4.0",
+    "@motion-canvas/vite-plugin": "^2.4.0",
+    "typescript": "^4.9.5",
+    "vite": "^3.0.5"
+  }
+}
