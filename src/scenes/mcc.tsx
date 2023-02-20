@@ -17,11 +17,14 @@ import discord from "../../media/video/discord.mp4"
 import logoimg from "../../media/images/logo.svg"
 import { cancel } from '@motion-canvas/core/lib/threading';
 import { Center } from '@motion-canvas/core/lib/types';
+import { createSignal } from '@motion-canvas/core/lib/signals';
 
 const WHITE = '#FFFFFFCD';
 const GREEN = '#25C281';
 
 export default makeScene2D(function* (view) {
+  const sceneOpacity = createSignal(0);
+
   const title = createRef<Layout>();
   const icebreaker = createRef<Text>();
   const mainText = createRef<Text>();
@@ -35,9 +38,9 @@ export default makeScene2D(function* (view) {
 
   view.add(
     <>
-      <Circle ref={outer} scale={0} width={1000} height={1000} fill={GREEN} x={360} y={50}/>
-      <Circle ref={inner} scale={0} width={1000} height={1000} fill={"#242424"} x={360} y={50}/>
-      <Layout ref={title} x={0} y={0} direction="column" layout>
+      <Circle ref={outer} opacity={() => sceneOpacity()} scale={0} width={1000} height={1000} fill={GREEN} x={360} y={50}/>
+      <Circle ref={inner} opacity={() => sceneOpacity()} scale={0} width={1000} height={1000} fill={"#242424"} x={360} y={50}/>
+      <Layout ref={title} opacity={() => sceneOpacity()} x={0} y={0} direction="column" layout>
         <Text
           ref={icebreaker}
           text={''}
@@ -45,6 +48,7 @@ export default makeScene2D(function* (view) {
           fontWeight={700}
           fontSize={84}
           fill={WHITE}
+          opacity={0.7}
         />
         <Layout direction={'row'} gap={50}>
           <Text
@@ -62,19 +66,32 @@ export default makeScene2D(function* (view) {
             fontWeight={700}
             fontSize={84}
             fill={GREEN}
-            opacity={0}
+            scale={0}
           />
         </Layout>
-        <Text
-          ref={subtitle}
-          text={""}
-          fontFamily={'Jetbrains Mono'}
-          fontWeight={300}
-          fontSize={48}
-          fill={WHITE}
-        />
+        
       </Layout>
-      <Image ref={logo} src={"../../media/images/logo.svg"} width={140} height={140} x={850} y={-430} />
+      <Text
+        ref={subtitle}
+        text={""}
+        fontFamily={'Jetbrains Mono'}
+        fontWeight={300}
+        y={() => title().size().y / 2 + title().position().y + 20}
+        x={() => -title().size().x / 2 + subtitle().size().x / 2}
+        fontSize={48}
+        fill={WHITE}
+      />
+      <Image 
+        ref={logo} 
+        src={"../../media/images/logo.svg"} 
+        size={[500, 500]} 
+        position={() => [
+          logo().size().x/2, 
+          logo().size().y/2 * -1
+        ]} 
+        offsetX={1} 
+        offsetY={-1} 
+      />
       <Rect
         ref={content}
         radius={10}
@@ -84,6 +101,7 @@ export default makeScene2D(function* (view) {
         x={0}
         y={0}
         fill={"#1e1e1e"}
+        opacity={() => sceneOpacity()}
       >
         <Text
           ref={explanation}
@@ -97,29 +115,39 @@ export default makeScene2D(function* (view) {
       </Rect>
     </>,
   );
+  yield* waitFor(0.5);
+  yield* all(
+    logo().size([140, 140], 0.5),
+    logo().position([920, -500], 0.5),
+    sceneOpacity(1, 0.2)
+  )
+
   yield* waitUntil("Introducing:")
-  yield* icebreaker().text('Introducing:', 1)
+  yield* icebreaker().text('Introducing:', 0.7)
   yield* waitUntil("Motion Canvas")
   yield* mainText().text('Motion Canvas', 1)
   yield* waitUntil("Competitions")
-  yield all(
-    outer().scale(5,0.5),
-    mainTextGreen().opacity(1, 0.5),
-    mainTextGreen().rotation(360, 0.5),
-  )
-  yield* waitFor(0.2)
-  yield* inner().scale(5, 0.5)
-  yield* waitUntil("Title up")
+
   yield* all(
-    title().position.y(-400, 1),
-    icebreaker().text("", 1),
+    outer().scale(5,0.1),
+    mainTextGreen().scale(1, 0.5), 
+    mainTextGreen().rotation(360, 0.6),
+    inner().scale(5, 1)
+  )
+
+  yield* waitFor(0.2)
+  yield* waitUntil("Title up")
+  yield icebreaker().opacity(0, 0.6)
+  yield icebreaker().text("I", 0.7),
+  yield* all(
+    title().position.y(-470, 1),
     mainTextGreen().text("Competitions", 1),
     icebreaker().fontSize(67,1),
     mainText().fontSize(67,1),
     mainTextGreen().fontSize(67,1),
   )
   yield* all(
-    title().justifyContent('center', 0),
+    // title().justifyContent('center', 0),
     subtitle().text("What are they?", 1),
     content().scale(1, 2, easeOutQuint)
   )

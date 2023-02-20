@@ -4,27 +4,27 @@
   "timeEvents": [
     {
       "name": "Introducing:",
-      "targetTime": 0.5009374999999999
+      "targetTime": 1
     },
     {
       "name": "Motion Canvas",
-      "targetTime": 1.8352777777777776
+      "targetTime": 2.079889033619741
     },
     {
       "name": "Competitions",
-      "targetTime": 3.444739583333333
+      "targetTime": 3.153208989681733
     },
     {
       "name": "Title up",
-      "targetTime": 5.035815972222222
+      "targetTime": 4.35
     },
     {
       "name": "Discord",
-      "targetTime": 17.0432208383638
+      "targetTime": 16.343220838363806
     },
     {
       "name": "End",
-      "targetTime": 40.72065565741225
+      "targetTime": 40.02065565741225
     }
   ]
 }
