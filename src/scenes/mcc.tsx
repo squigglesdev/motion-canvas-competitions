@@ -46,8 +46,8 @@ export default makeScene2D(function* (view) {
 
   view.add(
     <>
-      <Circle ref={outer} opacity={() => sceneOpacity()} scale={0} width={1000} height={1000} fill={GREEN} x={360} y={50}/>
-      <Circle ref={inner} opacity={() => sceneOpacity()} scale={0} width={1000} height={1000} fill={"#242424"} x={360} y={50}/>
+      <Circle ref={outer} scale={0} width={1000} height={1000} fill={GREEN} x={360} y={50}/>
+      <Circle ref={inner} scale={0} width={1000} height={1000} fill={"#242424"} x={360} y={50}/>
       <Layout ref={title} opacity={() => sceneOpacity()} x={0} y={0} direction="column" layout>
         <Text
           ref={icebreaker}
@@ -88,6 +88,7 @@ export default makeScene2D(function* (view) {
         x={() => -title().size().x / 2 + subtitle().size().x / 2}
         fontSize={48}
         fill={WHITE}
+        opacity={() => sceneOpacity()}
       />
       <Image 
         ref={logo} 
@@ -212,4 +213,11 @@ export default makeScene2D(function* (view) {
   yield* discord().src(contentAfter,0)
 
   yield* waitUntil("End")
+  yield* all(
+    logo().size([500, 500], 0.5),
+    logo().position.x(250, 0.5),
+    logo().position.y(-250, 0.5),
+    sceneOpacity(0, 0.2),
+    waitFor(1)
+  )
 });
