@@ -165,7 +165,6 @@ export default makeScene2D(function* (view) {
     subtitle().text("How to submit your work", 1),
   )
 
-  // TODO Create Discord ui components
-  // TODO Show how to submit work
+  
   yield* waitUntil("End")
 });
