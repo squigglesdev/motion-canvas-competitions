@@ -55,7 +55,7 @@ export default makeScene2D(function* (view) {
           />
           <Text
             ref={mainTextGreen}
-            text={'Competetions!'}
+            text={'Competitions!'}
             fontFamily={'Jetbrains Mono'}
             fontWeight={700}
             fontSize={84}
@@ -91,13 +91,13 @@ export default makeScene2D(function* (view) {
   yield* all(
     title().position.y(-400, 1),
     icebreaker().text("", 1),
-    mainTextGreen().text("Competetions", 1),
+    mainTextGreen().text("Competitions", 1),
     icebreaker().fontSize(67,1),
     mainText().fontSize(67,1),
     mainTextGreen().fontSize(67,1),
   )
   yield* all(
-    title().alignItems('center', 1),
+    title().justifyContent('center', 0),
     subtitle().text("What are they?", 1)
   )
 });
