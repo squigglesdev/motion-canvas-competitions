@@ -101,8 +101,8 @@ export default makeScene2D(function* (view) {
         x={0}
         y={0}
         fill={"#1e1e1e"}
-        opacity={() => sceneOpacity()}
-      >
+        opacity={() => sceneOpacity()}>
+          // TODO Create Discord ui components
         <Text
           ref={explanation}
           text={""}
@@ -165,7 +165,6 @@ export default makeScene2D(function* (view) {
     subtitle().text("How to submit your work", 1),
   )
 
-  // TODO Create Discord ui components
   // TODO Show how to submit work
   yield* waitUntil("End")
 });
