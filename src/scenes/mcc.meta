@@ -3,8 +3,20 @@
   "seed": 2247261186,
   "timeEvents": [
     {
-      "name": "End",
-      "targetTime": 15.266666666666667
+      "name": "Introducing:",
+      "targetTime": 0.5009374999999999
+    },
+    {
+      "name": "Motion Canvas",
+      "targetTime": 2.105069444444444
+    },
+    {
+      "name": "Competitions",
+      "targetTime": 3.6079861111111104
+    },
+    {
+      "name": "Title up",
+      "targetTime": 4.7708159722222225
     }
   ]
 }
