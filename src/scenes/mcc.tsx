@@ -19,49 +19,39 @@ const WHITE = '#FFFFFFCD';
 const GREEN = '#25C281';
 
 export default makeScene2D(function* (view) {
-  const title = createRef<Node>();
+  const title = createRef<Layout>();
   const icebreaker = createRef<Text>();
   const logo = createRef<Image>();
 
   view.add(
     <>
-      <Node
-        ref={title}
-        x={-250}
-      >
+      <Layout ref={title} direction="column" layout opacity={0}>
         <Text
           ref={icebreaker}
-          text={"Introducing:"}
-          x={-200}
-          y={-100}
-          fontFamily={"Jetbrains Mono"}
+          text={'Introducing:'}
+          fontFamily={'Jetbrains Mono'}
           fontWeight={700}
-          scale={2}
+          fontSize={100}
           fill={WHITE}
-        />,
-        <Text
-          text={"Motion Canvas"}
-          x={-170}
-          y={20}
-          fontFamily={"Jetbrains Mono"}
-          fontWeight={700}
-          scale={2}
-          fill={WHITE}
-        />,
-        <Text
-          text={"Competetions!"}
-          x={640}
-          y={20}
-          fontFamily={"Jetbrains Mono"}
-          fontWeight={700}
-          scale={2}
-          fill={GREEN}
-        />,
-      </Node>
-    
-    </>
-
-
+        />
+        <Layout direction={'row'} gap={28}>
+          <Text
+            text={'Motion Canvas'}
+            fontFamily={'Jetbrains Mono'}
+            fontWeight={700}
+            fontSize={100}
+            fill={WHITE}
+          />
+          <Text
+            text={'Competetions!'}
+            fontFamily={'Jetbrains Mono'}
+            fontWeight={700}
+            fontSize={100}
+            fill={GREEN}
+          />
+        </Layout>
+      </Layout>
+    </>,
   );
 
   yield* waitUntil("End")
