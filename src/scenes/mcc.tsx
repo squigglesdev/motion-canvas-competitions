@@ -33,7 +33,7 @@ export default makeScene2D(function* (view) {
     <>
       <Circle ref={outer} scale={0} width={1000} height={1000} fill={GREEN} x={360} y={50}/>
       <Circle ref={inner} scale={0} width={1000} height={1000} fill={"#242424"} x={360} y={50}/>
-      <Layout ref={title} direction="column" layout>
+      <Layout ref={title} x={0} y={0} direction="column" layout>
         <Text
           ref={icebreaker}
           text={''}
