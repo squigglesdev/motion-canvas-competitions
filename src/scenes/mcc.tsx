@@ -79,10 +79,11 @@ export default makeScene2D(function* (view) {
   yield* inner().scale(5, 0.5)
   yield* waitUntil("Title up")
   yield* all(
-    icebreaker().position.y(-430, 1),
-    mainText().position.y(-430, 1),
-    mainTextGreen().position.y(-430, 1),
+    title().position.y(-430, 1),
     icebreaker().text("", 1),
     mainTextGreen().text("Competetions", 1),
+    icebreaker().fontSize(67,1),
+    mainText().fontSize(67,1),
+    mainTextGreen().fontSize(67,1),
   )
 });
