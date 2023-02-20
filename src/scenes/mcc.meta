@@ -23,8 +23,12 @@
       "targetTime": 16.343220838363806
     },
     {
+      "name": "Type",
+      "targetTime": 20.117708333333333
+    },
+    {
       "name": "End",
-      "targetTime": 40.02065565741225
+      "targetTime": 41.287322324078914
     }
   ]
 }

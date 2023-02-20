@@ -13,8 +13,14 @@ import {all, any, loop, waitUntil, waitFor} from '@motion-canvas/core/lib/flow';
 import {createRef, range} from '@motion-canvas/core/lib/utils';
 import {easeInQuint, easeOutBack, easeOutQuint, linear} from '@motion-canvas/core/lib/tweening';
 import bg from "../../media/images/BGMC.png"
-import discord from "../../media/video/discord.mp4"
-import logoimg from "../../media/images/logo.svg"
+import contentBefore from "../../media/Images/contentBefore.png"
+import content1 from "../../media/Images/content1.png"
+import content2 from "../../media/Images/content2.png"
+import content3 from "../../media/Images/content3.png"
+import content4 from "../../media/Images/content4.png"
+
+import contentAfter from "../../media/Images/contentAfter.png"
+import logoimg from "../../media/Images/logo.svg"
 import { cancel } from '@motion-canvas/core/lib/threading';
 import { Center } from '@motion-canvas/core/lib/types';
 import { createSignal } from '@motion-canvas/core/lib/signals';
@@ -35,6 +41,8 @@ export default makeScene2D(function* (view) {
   const logo = createRef<Image>();
   const content = createRef<Rect>();
   const explanation = createRef<Text>();
+  const discord = createRef<Image>();
+  const submit = createRef<Text>();
 
   view.add(
     <>
@@ -102,7 +110,25 @@ export default makeScene2D(function* (view) {
         y={0}
         fill={"#1e1e1e"}
         opacity={() => sceneOpacity()}>
-          // TODO Create Discord ui components
+        <Image
+          ref={discord}
+          src={contentBefore}
+          radius={10}
+          width={1148}
+          x={0}
+          y={0}
+          opacity={0}
+        />
+        <Text
+          ref={submit}
+          text={""}
+          x={-(513+13)}
+          y={268+13}
+          fontFamily={"gg sans"}
+          fontSize={16.86}
+          fontWeight={400}
+          fill={"white"}
+        />
         <Text
           ref={explanation}
           text={""}
@@ -165,6 +191,25 @@ export default makeScene2D(function* (view) {
     subtitle().text("How to submit your work", 1),
   )
 
-  // TODO Show how to submit work
+  yield* discord().opacity(1,1, easeInQuint)
+
+  yield* waitUntil("Type")
+  yield* all(
+    submit().text("/submit", 1.5),
+    submit().position.x((-(513+13))+29, 1.5)
+  )
+  yield* all(
+    submit().text("",0),
+    discord().src(content1, 0),
+  )
+  yield* waitFor(2)
+  yield* discord().src(content2,0)
+  yield* waitFor(2)
+  yield* discord().src(content3,0)
+  yield* waitFor(2)
+  yield* discord().src(content4,0)
+  yield* waitFor(2)
+  yield* discord().src(contentAfter,0)
+
   yield* waitUntil("End")
 });
