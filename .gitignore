@@ -2,6 +2,7 @@
 node_modules
 output
 dist
+output.mp4
 
 # Editor directories and files
 .vscode/*
@@ -13,4 +14,3 @@ dist
 *.njsproj
 *.sln
 *.sw?
-output.mp4
