@@ -17,6 +17,14 @@
     {
       "name": "Title up",
       "targetTime": 5.035815972222222
+    },
+    {
+      "name": "Discord",
+      "targetTime": 17.0432208383638
+    },
+    {
+      "name": "End",
+      "targetTime": 40.72065565741225
     }
   ]
 }

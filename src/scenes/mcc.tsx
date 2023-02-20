@@ -11,7 +11,7 @@ import {
 } from '@motion-canvas/2d/lib/components';
 import {all, any, loop, waitUntil, waitFor} from '@motion-canvas/core/lib/flow';
 import {createRef, range} from '@motion-canvas/core/lib/utils';
-import {easeOutBack, linear} from '@motion-canvas/core/lib/tweening';
+import {easeInQuint, easeOutBack, easeOutQuint, linear} from '@motion-canvas/core/lib/tweening';
 import bg from "../../media/images/BGMC.png"
 import discord from "../../media/video/discord.mp4"
 import logoimg from "../../media/images/logo.svg"
@@ -30,6 +30,8 @@ export default makeScene2D(function* (view) {
   const outer = createRef<Circle>();
   const inner = createRef<Circle>();
   const logo = createRef<Image>();
+  const content = createRef<Rect>();
+  const explanation = createRef<Text>();
 
   view.add(
     <>
@@ -73,6 +75,26 @@ export default makeScene2D(function* (view) {
         />
       </Layout>
       <Image ref={logo} src={"../../media/images/logo.svg"} width={140} height={140} x={850} y={-430} />
+      <Rect
+        ref={content}
+        radius={10}
+        width={1148}
+        height={339}
+        scale={0}
+        x={0}
+        y={0}
+        fill={"#1e1e1e"}
+      >
+        <Text
+          ref={explanation}
+          text={""}
+          fontFamily={"Noto Sans"}
+          fontSize={36}
+          letterSpacing={2}
+          lineHeight={50}
+          fill={WHITE}
+        />
+      </Rect>
     </>,
   );
   yield* waitUntil("Introducing:")
@@ -98,6 +120,21 @@ export default makeScene2D(function* (view) {
   )
   yield* all(
     title().justifyContent('center', 0),
-    subtitle().text("What are they?", 1)
+    subtitle().text("What are they?", 1),
+    content().scale(1, 2, easeOutQuint)
   )
+  yield* explanation().text("Motion Canvas Competitions (MCCs) are a fun way to\nparticipate in the Motion Canvas community whilst\npractising your skills! They are similar to game jams and\nare held bi-weekly. A new theme is presented at the\nbeginning of each challenge and you will have to create\nan animation based on that theme.", 2)
+  yield* waitUntil("Discord")
+  
+  yield* all(
+    subtitle().text("", 0.5),
+    explanation().text("", 0.5),
+  )
+  yield* all(
+    content().fill("313338", 1, easeInQuint),
+    content().height(646, 1, easeInQuint),
+    content().position.y(88, 1, easeOutQuint),
+    subtitle().text("How to submit your work", 1),
+  )
+  yield* waitUntil("End")
 });
