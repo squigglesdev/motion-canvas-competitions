@@ -1,2 +1,2 @@
-# motion-canvas-competitions
-MC animation for this promotion thing.
+![logo](media/images/logo.svg)
+Motion Canvas Competitions Animation
