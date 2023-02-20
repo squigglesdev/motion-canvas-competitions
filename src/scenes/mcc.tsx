@@ -16,6 +16,7 @@ import bg from "../../media/images/BGMC.png"
 import discord from "../../media/video/discord.mp4"
 import logoimg from "../../media/images/logo.svg"
 import { cancel } from '@motion-canvas/core/lib/threading';
+import { Center } from '@motion-canvas/core/lib/types';
 
 const WHITE = '#FFFFFFCD';
 const GREEN = '#25C281';
@@ -25,6 +26,7 @@ export default makeScene2D(function* (view) {
   const icebreaker = createRef<Text>();
   const mainText = createRef<Text>();
   const mainTextGreen = createRef<Text>();
+  const subtitle = createRef<Text>();
   const outer = createRef<Circle>();
   const inner = createRef<Circle>();
   const logo = createRef<Image>();
@@ -61,6 +63,14 @@ export default makeScene2D(function* (view) {
             opacity={0}
           />
         </Layout>
+        <Text
+          ref={subtitle}
+          text={""}
+          fontFamily={'Jetbrains Mono'}
+          fontWeight={300}
+          fontSize={48}
+          fill={WHITE}
+        />
       </Layout>
       <Image ref={logo} src={"../../media/images/logo.svg"} width={140} height={140} x={850} y={-430} />
     </>,
@@ -79,11 +89,15 @@ export default makeScene2D(function* (view) {
   yield* inner().scale(5, 0.5)
   yield* waitUntil("Title up")
   yield* all(
-    title().position.y(-430, 1),
+    title().position.y(-400, 1),
     icebreaker().text("", 1),
     mainTextGreen().text("Competetions", 1),
     icebreaker().fontSize(67,1),
     mainText().fontSize(67,1),
     mainTextGreen().fontSize(67,1),
+  )
+  yield* all(
+    title().alignItems('center', 1),
+    subtitle().text("What are they?", 1)
   )
 });
