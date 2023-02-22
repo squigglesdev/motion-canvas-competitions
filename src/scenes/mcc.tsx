@@ -191,6 +191,11 @@ export default makeScene2D(function* (view) {
     subtitle().text("How to submit your work", 1),
   )
 
+
+  // TODO add cursor component
+  //  Shows flow of what user has to do in discord
+  //  assignees: squigglesdev
+  //  labels: enhancement
   yield* discord().opacity(1,1, easeInQuint)
 
   yield* waitUntil("Type")
@@ -198,15 +203,15 @@ export default makeScene2D(function* (view) {
     submit().text("/submit", 2),
     submit().position.x((-(513+13))+29, 2)
   )
+  // TODO properly animate discord submission
+  //  Properly animate as if someone is actually typing, not sharp cuts like this.
+  //  assignees: squigglesdev
+  //  labels: enhancement
   yield* all(
     submit().text("",0),
     discord().src(content1, 0),
   )
 
-  // TODO properly animate discord submission
-  //  Properly animate as if someone is actually typing, not sharp cuts like this.
-  //  assignees: squigglesdev
-  //  labels: enhancement
   yield* waitFor(2)
   yield* discord().src(content2,0)
   yield* waitFor(2)
@@ -217,6 +222,13 @@ export default makeScene2D(function* (view) {
   yield* discord().src(contentAfter,0)
 
   yield* waitUntil("End")
+  yield* all(
+    discord().opacity(0, 0.5),
+    content().scale(0, 2, easeOutQuint),
+    subtitle().text("", 0.5),
+    mainText().text("",1),
+    mainTextGreen().text("",0.5),
+  )
   yield* all(
     logo().size([500, 500], 0.5),
     logo().position.x(250, 0.5),
