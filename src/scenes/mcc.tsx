@@ -132,7 +132,7 @@ export default makeScene2D(function* (view) {
         />
         <Text
           ref={explanation}
-          text={""}
+          text={"Motion Canvas Competitions (MCCs) are a fun way to\nparticipate in the Motion Canvas community whilst\npractising your skills! They are similar to game jams and\nare held bi-weekly. A new theme is presented at the\nbeginning of each challenge and you will have to create\nan animation based on that theme."}
           fontFamily={"Noto Sans"}
           fontSize={36}
           letterSpacing={2}
@@ -156,7 +156,7 @@ export default makeScene2D(function* (view) {
   yield* waitUntil("Competitions")
 
   yield* all(
-    outer().scale(5,0.1),
+    outer().scale(5,0.5),
     mainTextGreen().scale(1, 0.5), 
     mainTextGreen().rotation(360, 0.6),
     inner().scale(5, 1)
@@ -178,7 +178,6 @@ export default makeScene2D(function* (view) {
     subtitle().text("What are they?", 1),
     content().scale(1, 2, easeOutQuint)
   )
-  yield* explanation().text("Motion Canvas Competitions (MCCs) are a fun way to\nparticipate in the Motion Canvas community whilst\npractising your skills! They are similar to game jams and\nare held bi-weekly. A new theme is presented at the\nbeginning of each challenge and you will have to create\nan animation based on that theme.", 2)
   yield* waitUntil("Discord")
   
   yield* all(
@@ -196,8 +195,8 @@ export default makeScene2D(function* (view) {
 
   yield* waitUntil("Type")
   yield* all(
-    submit().text("/submit", 1.5),
-    submit().position.x((-(513+13))+29, 1.5)
+    submit().text("/submit", 2),
+    submit().position.x((-(513+13))+29, 2)
   )
   yield* all(
     submit().text("",0),
