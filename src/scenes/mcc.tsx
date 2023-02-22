@@ -202,6 +202,11 @@ export default makeScene2D(function* (view) {
     submit().text("",0),
     discord().src(content1, 0),
   )
+
+  // TODO properly animate discord submission
+  //  Properly animate as if someone is actually typing, not sharp cuts like this.
+  //  assignees: squigglesdev
+  //  labels: enhancement
   yield* waitFor(2)
   yield* discord().src(content2,0)
   yield* waitFor(2)
