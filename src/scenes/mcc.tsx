@@ -150,9 +150,10 @@ export default makeScene2D(function* (view) {
         state={'pointer'}
         ref={cursor}
         fill={WHITE}
-        accent={WHITE}
+        accent={'white'}
         stroke={'black'}
         x={1000}
+        scale={0.75}
       />
     </>,
   );
@@ -207,12 +208,12 @@ export default makeScene2D(function* (view) {
 
   yield all(
     discord().opacity(1,1, easeInQuint),
-    cursor().position([-521,305], 1.5),
+    cursor().position([-521,320], 1.5),
   );
   yield* waitFor(1)
   yield* all(
+    cursor().stroke('#ffffff', 0),
     cursor().state('text',0),
-    cursor().position.y(305,0),
   )
   yield* waitUntil("Type")
   yield* all(
