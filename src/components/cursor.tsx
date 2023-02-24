@@ -16,9 +16,10 @@ import {all} from '@motion-canvas/core/lib/flow';
 import { Gradient } from '@motion-canvas/2d/lib/partials';
 import { PossibleVector2 } from '@motion-canvas/core/lib/types';
 
+export type CursorState = 'pointer' | 'text';
 
 export interface CursorProps extends NodeProps {
-    state?: SignalValue<string>;
+    state?: SignalValue<CursorState>;
     fill?: SignalValue<PossibleColor>;
     accent?: SignalValue<PossibleColor>;
     stroke?: SignalValue<PossibleColor>;

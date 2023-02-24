@@ -150,8 +150,8 @@ export default makeScene2D(function* (view) {
         state={'pointer'}
         ref={cursor}
         fill={WHITE}
-        accent={GREEN}
-        stroke={WHITE}
+        accent={WHITE}
+        stroke={'black'}
         x={1000}
       />
     </>,
