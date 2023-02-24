@@ -1,2 +1,2 @@
-![logo](media/images/logo.svg)
+![logo](media/Images/logo.svg)
 Motion Canvas Competitions Animation
