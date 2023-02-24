@@ -8,8 +8,10 @@ import {
   Image,
   Video,
   Circle,
+  NodeProps,
 } from '@motion-canvas/2d/lib/components';
 import {all, any, loop, waitUntil, waitFor} from '@motion-canvas/core/lib/flow';
+import {Cursor} from '../components/cursor'
 import {createRef, range} from '@motion-canvas/core/lib/utils';
 import {easeInQuint, easeOutBack, easeOutQuint, linear} from '@motion-canvas/core/lib/tweening';
 import bg from "../../media/images/BGMC.png"
@@ -18,6 +20,8 @@ import content1 from "../../media/Images/content1.png"
 import content2 from "../../media/Images/content2.png"
 import content3 from "../../media/Images/content3.png"
 import content4 from "../../media/Images/content4.png"
+import contentClick from "../../media/Images/contentclick.png"
+import contentFinish from "../../media/Images/contentfinish.png"
 
 import contentAfter from "../../media/Images/contentAfter.png"
 import logoimg from "../../media/Images/logo.svg"
@@ -43,8 +47,9 @@ export default makeScene2D(function* (view) {
   const explanation = createRef<Text>();
   const discord = createRef<Image>();
   const submit = createRef<Text>();
+  const cursor = createRef<Cursor>();
 
-  view.add(
+  yield view.add(
     <>
       <Circle ref={outer} scale={0} width={1000} height={1000} fill={GREEN} x={360} y={50}/>
       <Circle ref={inner} scale={0} width={1000} height={1000} fill={"#242424"} x={360} y={50}/>
@@ -122,13 +127,14 @@ export default makeScene2D(function* (view) {
         />
         <Text
           ref={submit}
-          text={""}
+          text={"|"}
           x={-(513+13)}
           y={268+13}
           fontFamily={"gg sans"}
           fontSize={16.86}
           fontWeight={400}
           fill={"white"}
+          opacity={0}
         />
         <Text
           ref={explanation}
@@ -140,6 +146,15 @@ export default makeScene2D(function* (view) {
           fill={WHITE}
         />
       </Rect>
+      <Cursor
+        state={'pointer'}
+        ref={cursor}
+        fill={WHITE}
+        accent={'white'}
+        stroke={'black'}
+        x={1000}
+        scale={0.75}
+      />
     </>,
   );
   yield* waitFor(0.5);
@@ -191,15 +206,19 @@ export default makeScene2D(function* (view) {
     subtitle().text("How to submit your work", 1),
   )
 
-
-  // TODO add cursor component
-  //  Shows flow of what user has to do in discord
-  //  assignees: squigglesdev
-  //  labels: enhancement
-  yield* discord().opacity(1,1, easeInQuint)
-
+  yield all(
+    discord().opacity(1,1, easeInQuint),
+    cursor().position([-521,320], 1.5),
+  );
+  yield* waitFor(1)
+  yield* all(
+    cursor().stroke('#ffffff', 0),
+    cursor().state('text',0),
+  )
   yield* waitUntil("Type")
   yield* all(
+    submit().opacity(1,0),
+    cursor().opacity(0,0),
     submit().text("/submit", 2),
     submit().position.x((-(513+13))+29, 2)
   )
@@ -221,8 +240,20 @@ export default makeScene2D(function* (view) {
   yield* waitFor(2)
   yield* discord().src(contentAfter,0)
 
+  yield* all(
+    cursor().state('pointer',0),
+    cursor().opacity(1,0),
+    cursor().position.y(365,0),
+    cursor().position.x(526,1),
+  )
+  yield* waitFor(0.5)
+  yield* discord().src(contentClick,0)
+  yield* waitFor(0.2)
+  yield* discord().src(contentFinish,0)
+
   yield* waitUntil("End")
   yield* all(
+    cursor().position([1000,0], 1.5),
     discord().opacity(0, 0.5),
     content().scale(0, 2, easeOutQuint),
     subtitle().text("", 0.5),
